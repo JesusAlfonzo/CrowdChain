@@ -1,150 +1,236 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CryptoFund | Futuro Descentralizado</title>
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        crypto: {
-                            primary: '#6366f1',   // Indigo
-                            secondary: '#a855f7', // Purple
-                            dark: '#0f172a',      // Slate 900
-                            card: '#1e293b'       // Slate 800
-                        }
-                    }
-                }
-            }
-        }
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              crypto: {
+                primary: "#6366f1", // Indigo
+                secondary: "#a855f7", // Purple
+                dark: "#0f172a", // Slate 900
+                card: "#1e293b", // Slate 800
+              },
+            },
+          },
+        },
+      };
     </script>
-</head>
-<body class="bg-crypto-dark text-slate-200 font-sans min-h-screen flex flex-col items-center justify-center p-4">
-
-    <nav class="w-full max-w-2xl flex justify-between items-center mb-8 px-4" aria-label="Navegación principal">
-        <div class="flex items-center gap-2 select-none">
-            <i class="ph-fill ph-polygon text-3xl text-indigo-500"></i>
-            <span class="text-xl font-bold tracking-wide text-white">Crowd<span class="text-indigo-500">Chain</span></span>
-        </div>
-        <div class="flex items-center gap-2 text-sm bg-slate-800 py-1 px-3 rounded-full border border-slate-700">
-            <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-            <span class="text-slate-400">Red: Ganache Local</span>
-        </div>
+  </head>
+  <body
+    class="bg-crypto-dark text-slate-200 font-sans min-h-screen flex flex-col items-center justify-center p-4"
+  >
+    <nav
+      class="w-full max-w-2xl flex justify-between items-center mb-8 px-4"
+      aria-label="Navegación principal"
+    >
+      <div class="flex items-center gap-2 select-none">
+        <i class="ph-fill ph-polygon text-3xl text-indigo-500"></i>
+        <span class="text-xl font-bold tracking-wide text-white"
+          >Crowd<span class="text-indigo-500">Chain</span></span
+        >
+      </div>
+      <div
+        class="flex items-center gap-2 text-sm bg-slate-800 py-1 px-3 rounded-full border border-slate-700"
+      >
+        <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+        <span class="text-slate-400">Red: Ganache Local</span>
+      </div>
     </nav>
 
-    <main class="w-full max-w-2xl bg-crypto-card rounded-2xl shadow-2xl border border-slate-700 overflow-hidden relative">
-        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
+    <main
+      class="w-full max-w-2xl bg-crypto-card rounded-2xl shadow-2xl border border-slate-700 overflow-hidden relative"
+    >
+      <div
+        class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
+      ></div>
 
-        <div class="p-8">
-            <header class="flex justify-between items-start mb-6">
-                <div>
-                    <h1 class="text-3xl font-bold text-white mb-2">Proyecto Universitario</h1>
-                    <p class="text-slate-400 text-sm">Financiamiento descentralizado seguro y transparente.</p>
-                </div>
-                <span id="statusDisplay" class="px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider bg-slate-700 text-slate-300">
-                    Cargando...
-                </span>
-            </header>
+      <div class="p-8">
+        <header class="flex justify-between items-start mb-6">
+          <div>
+            <h1 class="text-3xl font-bold text-white mb-2">
+              Proyecto Universitario
+            </h1>
+            <p class="text-slate-400 text-sm">
+              Financiamiento descentralizado seguro y transparente.
+            </p>
+          </div>
+          <span
+            id="statusDisplay"
+            class="px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider bg-slate-700 text-slate-300"
+          >
+            Cargando...
+          </span>
+        </header>
 
-            <section class="mb-8" aria-label="Progreso de la campaña">
-                <div class="flex justify-between text-sm mb-2 font-medium">
-                    <span class="text-slate-300">Recaudado: <span id="collectedDisplay" class="text-white text-lg">0</span> ETH</span>
-                    <span class="text-slate-400">Meta: <span id="goalDisplay">0</span> ETH</span>
-                </div>
-                
-                <div class="w-full bg-slate-700 rounded-full h-4 overflow-hidden" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                    <div id="progressBar" class="bg-gradient-to-r from-indigo-500 to-purple-500 h-4 rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
-                </div>
-                
-                <div class="text-right mt-2 text-xs text-slate-500 font-mono">
-                    Tiempo Restante: <span id="timeLeft" class="text-indigo-400 font-bold">--</span>
-                </div>
-            </section>
+        <section class="mb-8" aria-label="Progreso de la campaña">
+          <div class="flex justify-between text-sm mb-2 font-medium">
+            <span class="text-slate-300"
+              >Recaudado:
+              <span id="collectedDisplay" class="text-white text-lg">0</span>
+              ETH</span
+            >
+            <span class="text-slate-400"
+              >Meta: <span id="goalDisplay">0</span> ETH</span
+            >
+          </div>
 
-            <div class="grid gap-6">
-                
-                <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-700/50 flex flex-col sm:flex-row justify-between items-center gap-4">
-                    <div class="flex items-center gap-3">
-                        <div class="bg-indigo-500/20 p-2 rounded-lg text-indigo-400">
-                            <i class="ph ph-wallet text-2xl"></i>
-                        </div>
-                        <div class="flex flex-col">
-                            <span class="text-xs text-slate-500 uppercase font-bold">Tu Billetera</span>
-                            <span id="userAccount" class="text-sm font-mono text-slate-300 truncate w-32 sm:w-auto" title="Dirección de la billetera conectada">No conectado</span>
-                        </div>
-                    </div>
-                    <button id="connectWalletBtn" class="bg-slate-700 hover:bg-slate-600 text-white px-5 py-2 rounded-lg transition-colors text-sm font-medium focus:ring-2 focus:ring-indigo-500 focus:outline-none">
-                        Conectar MetaMask
-                    </button>
-                </div>
+          <div
+            class="w-full bg-slate-700 rounded-full h-4 overflow-hidden"
+            role="progressbar"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          >
+            <div
+              id="progressBar"
+              class="bg-gradient-to-r from-indigo-500 to-purple-500 h-4 rounded-full transition-all duration-1000 ease-out"
+              style="width: 0%"
+            ></div>
+          </div>
 
-                <div class="bg-slate-900/50 p-6 rounded-xl border border-slate-700/50">
-                    <label for="donationAmount" class="block text-sm font-medium text-slate-400 mb-2">Cantidad a donar (ETH)</label>
-                    <div class="flex gap-3">
-                        <input type="number" id="donationAmount" placeholder="Ej: 2.5" min="0" step="0.01" class="bg-slate-800 text-white border border-slate-600 rounded-lg px-4 py-3 w-full focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all placeholder-slate-600">
-                        <button id="donateBtn" disabled class="bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-700 disabled:text-slate-500 disabled:cursor-not-allowed text-white px-6 py-3 rounded-lg font-bold transition-all shadow-lg shadow-indigo-500/30 flex items-center gap-2 whitespace-nowrap focus:ring-2 focus:ring-indigo-500 focus:outline-none">
-                            <i class="ph-bold ph-paper-plane-tilt"></i> Donar
-                        </button>
-                    </div>
-                </div>
+          <div class="text-right mt-2 text-xs text-slate-500 font-mono">
+            Tiempo Restante:
+            <span id="timeLeft" class="text-indigo-400 font-bold">--</span>
+          </div>
+        </section>
 
-                <div class="grid grid-cols-2 gap-4 pt-4 border-t border-slate-700">
-                    <button id="withdrawBtn" disabled class="flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-green-600/20 text-green-500 border border-green-600/30 font-medium hover:bg-green-600 hover:text-white transition-all disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-green-500 disabled:cursor-not-allowed focus:ring-2 focus:ring-green-500 focus:outline-none">
-                        <i class="ph-bold ph-download-simple"></i> Retirar Fondos
-                    </button>
-                    <button id="refundBtn" disabled class="flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-red-500/20 text-red-400 border border-red-500/30 font-medium hover:bg-red-500 hover:text-white transition-all disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-red-400 disabled:cursor-not-allowed focus:ring-2 focus:ring-red-500 focus:outline-none">
-                        <i class="ph-bold ph-arrow-u-down-left"></i> Reembolso
-                    </button>
-                </div>
-
+        <div class="grid gap-6">
+          <div
+            class="bg-slate-900/50 p-4 rounded-xl border border-slate-700/50 flex flex-col sm:flex-row justify-between items-center gap-4"
+          >
+            <div class="flex items-center gap-3">
+              <div class="bg-indigo-500/20 p-2 rounded-lg text-indigo-400">
+                <i class="ph ph-wallet text-2xl"></i>
+              </div>
+              <div class="flex flex-col">
+                <span class="text-xs text-slate-500 uppercase font-bold"
+                  >Tu Billetera</span
+                >
+                <span
+                  id="userAccount"
+                  class="text-sm font-mono text-slate-300 truncate w-32 sm:w-auto"
+                  title="Dirección de la billetera conectada"
+                  >No conectado</span
+                >
+              </div>
             </div>
-        </div>
+            <button
+              id="connectWalletBtn"
+              class="bg-slate-700 hover:bg-slate-600 text-white px-5 py-2 rounded-lg transition-colors text-sm font-medium focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+            >
+              Conectar MetaMask
+            </button>
+          </div>
 
-        <div class="bg-slate-900 px-8 py-4 text-center border-t border-slate-800" aria-live="polite">
-            <p id="message" class="text-sm text-slate-400 font-medium min-h-[20px] animate-pulse">Esperando conexión...</p>
+          <div
+            class="bg-slate-900/50 p-6 rounded-xl border border-slate-700/50"
+          >
+            <label
+              for="donationAmount"
+              class="block text-sm font-medium text-slate-400 mb-2"
+              >Cantidad a donar (ETH)</label
+            >
+            <div class="flex gap-3">
+              <input
+                type="number"
+                id="donationAmount"
+                placeholder="Ej: 2.5"
+                min="0"
+                step="0.01"
+                class="bg-slate-800 text-white border border-slate-600 rounded-lg px-4 py-3 w-full focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all placeholder-slate-600"
+              />
+              <button
+                id="donateBtn"
+                disabled
+                class="bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-700 disabled:text-slate-500 disabled:cursor-not-allowed text-white px-6 py-3 rounded-lg font-bold transition-all shadow-lg shadow-indigo-500/30 flex items-center gap-2 whitespace-nowrap focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              >
+                <i class="ph-bold ph-paper-plane-tilt"></i> Donar
+              </button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4 pt-4 border-t border-slate-700">
+            <button
+              id="withdrawBtn"
+              disabled
+              class="flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-green-600/20 text-green-500 border border-green-600/30 font-medium hover:bg-green-600 hover:text-white transition-all disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-green-500 disabled:cursor-not-allowed focus:ring-2 focus:ring-green-500 focus:outline-none"
+            >
+              <i class="ph-bold ph-download-simple"></i> Retirar Fondos
+            </button>
+            <button
+              id="refundBtn"
+              disabled
+              class="flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-red-500/20 text-red-400 border border-red-500/30 font-medium hover:bg-red-500 hover:text-white transition-all disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-red-400 disabled:cursor-not-allowed focus:ring-2 focus:ring-red-500 focus:outline-none"
+            >
+              <i class="ph-bold ph-arrow-u-down-left"></i> Reembolso
+            </button>
+          </div>
         </div>
+      </div>
+
+      <div
+        class="bg-slate-900 px-8 py-4 text-center border-t border-slate-800"
+        aria-live="polite"
+      >
+        <p
+          id="message"
+          class="text-sm text-slate-400 font-medium min-h-[20px] animate-pulse"
+        >
+          Esperando conexión...
+        </p>
+      </div>
     </main>
 
     <section class="w-full max-w-2xl mt-8">
-        <h3 class="text-slate-400 text-sm font-bold uppercase tracking-wider mb-4 flex items-center gap-2">
-            <i class="ph-bold ph-list-dashes"></i> Historial de Donaciones
-        </h3>
-        
-        <div class="bg-crypto-card rounded-2xl border border-slate-700 overflow-hidden max-h-60 overflow-y-auto custom-scrollbar shadow-inner">
-            <ul id="donorsList" class="divide-y divide-slate-700/50">
-                <li class="p-4 text-center text-slate-500 text-sm italic">
-                    Aún no hay donaciones. ¡Sé el primero!
-                </li>
-            </ul>
-        </div>
+      <h3
+        class="text-slate-400 text-sm font-bold uppercase tracking-wider mb-4 flex items-center gap-2"
+      >
+        <i class="ph-bold ph-list-dashes"></i> Historial de Donaciones
+      </h3>
+
+      <div
+        class="bg-crypto-card rounded-2xl border border-slate-700 overflow-hidden max-h-60 overflow-y-auto custom-scrollbar shadow-inner"
+      >
+        <ul id="donorsList" class="divide-y divide-slate-700/50">
+          <li class="p-4 text-center text-slate-500 text-sm italic">
+            Aún no hay donaciones. ¡Sé el primero!
+          </li>
+        </ul>
+      </div>
     </section>
 
     <section class="w-full max-w-2xl mt-8 mb-12">
-        <h3 class="text-slate-400 text-sm font-bold uppercase tracking-wider mb-4 flex items-center gap-2">
-            <i class="ph-bold ph-arrow-u-up-right"></i> Historial de Salidas
-        </h3>
-        
-        <div class="bg-crypto-card rounded-2xl border border-slate-700 overflow-hidden max-h-60 overflow-y-auto custom-scrollbar shadow-inner">
-            <ul id="withdrawalsList" class="divide-y divide-slate-700/50">
-                <li class="p-4 text-center text-slate-500 text-sm italic">
-                    No hay retiros ni reembolsos registrados.
-                </li>
-            </ul>
-        </div>
+      <h3
+        class="text-slate-400 text-sm font-bold uppercase tracking-wider mb-4 flex items-center gap-2"
+      >
+        <i class="ph-bold ph-arrow-u-up-right"></i> Historial de Salidas
+      </h3>
+
+      <div
+        class="bg-crypto-card rounded-2xl border border-slate-700 overflow-hidden max-h-60 overflow-y-auto custom-scrollbar shadow-inner"
+      >
+        <ul id="withdrawalsList" class="divide-y divide-slate-700/50">
+          <li class="p-4 text-center text-slate-500 text-sm italic">
+            No hay retiros ni reembolsos registrados.
+          </li>
+        </ul>
+      </div>
     </section>
 
     <footer class="mt-8 text-slate-600 text-xs">
-        &copy; 2025 Proyecto Universitario Blockchain
+      &copy; 2025 Proyecto Universitario Blockchain
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
     <script src="app.js"></script>
-</body>
+  </body>
 </html>

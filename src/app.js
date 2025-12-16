@@ -1,11 +1,4 @@
-/**
- * APP.JS - Lógica del Frontend para CrowdChain
- * Principios: Clean Code, ES6+, Async/Await
- */
-
-// =======================================================
 // 1. CONFIGURACIÓN Y CONSTANTES
-// =======================================================
 const CONTRACT_ADDRESS = "0x0573439504882aF6507eB0b0855f34047E57FE36"; // <--- TU DIRECCIÓN
 const TARGET_CHAIN_ID = "0x539"; // Ganache (1337 en Hex)
 
@@ -149,9 +142,7 @@ let contract;
 let userAccount;
 let campaignDeadline;
 
-// =======================================================
 // 2. INICIALIZACIÓN
-// =======================================================
 window.addEventListener("load", initApp);
 
 async function initApp() {
@@ -186,9 +177,7 @@ function setupEventListeners() {
   document.getElementById("refundBtn").addEventListener("click", handleRefund);
 }
 
-// =======================================================
 // 3. CONEXIÓN Y RED
-// =======================================================
 async function connectWallet() {
   try {
     // 1. Verificar Red (Ganache)
@@ -250,9 +239,7 @@ function updateConnectionUI(account) {
   btn.disabled = true;
 }
 
-// =======================================================
 // 4. LECTURA DE DATOS (READ)
-// =======================================================
 async function loadContractData() {
   try {
     // Llamadas Paralelas para eficiencia
@@ -349,10 +336,7 @@ function updateTimerUI() {
   }
 }
 
-// =======================================================
 // 5. TRANSACCIONES (WRITE)
-// =======================================================
-
 async function handleDonate() {
   const amountEth = document.getElementById("donationAmount").value;
   if (!amountEth || amountEth <= 0)
@@ -403,10 +387,7 @@ function handleTxError(error, customMsg) {
   showMessage(msg, "error");
 }
 
-// =======================================================
 // 6. HISTORIAL DE EVENTOS
-// =======================================================
-
 async function loadDonationHistory() {
   const list = document.getElementById("donorsList");
   try {
@@ -507,9 +488,7 @@ function createListItem(
     </li>`;
 }
 
-// =======================================================
 // 7. UTILIDADES (UI)
-// =======================================================
 function showMessage(text, type) {
   const config = {
     background: "#1e293b",
