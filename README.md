@@ -81,18 +81,18 @@ Asegúrate de tener instalado:
 5.  Prueba las funciones de **"Retirar Fondos"** y **"Solicitar Reembolso"**.
 
 ## 📁 Estructura del Proyecto
-CrowdChain-DApp/
-├── contracts/ # Contratos Inteligentes (Solidity)
-├── migrations/ # Scripts de despliegue de Truffle
-├── src/ # Código Fuente del Frontend
-│ ├── index.html
-│ ├── css/
-│ └── js/
-├── test/ # Pruebas para Smart Contracts
-├── truffle-config.js # Configuración de Truffle
-└── README.md
 
-text
+```text
+CrowdChain-DApp/
+├── contracts/          # Contratos Inteligentes (Solidity)
+├── migrations/         # Scripts de despliegue de Truffle
+├── src/                # Código Fuente del Frontend
+│   ├── index.html      # Interfaz de usuario
+│   ├── css/            # Estilos (si aplicase)
+│   └── js/             # Lógica (app.js)
+├── test/               # Pruebas para Smart Contracts
+├── truffle-config.js   # Configuración de Truffle
+└── README.md           # Documentación del proyecto
 
 ## 🤝 Cómo Contribuir
 ¡Las contribuciones son bienvenidas!
@@ -106,14 +106,4 @@ text
 Este proyecto está bajo la **Licencia MIT**. Consulta el archivo `LICENSE` para más detalles.
 
 ---
-### 🚀 Subir el Proyecto a GitHub (Primera Vez)
-```bash
-git init
-git add .
-git commit -m "Primer lanzamiento: DApp de Crowdfunding completa"
-git branch -M main
-git remote add origin https://github.com/TU_USUARIO/CrowdChain-DApp.git
-git push -u origin main
-Nota: GitHub ya no acepta contraseñas en la línea de comandos. Para HTTPS, usa un Personal Access Token (PAT). Para SSH, asegúrate de agregar tu clave pública a GitHub.
-
 Desarrollado con ❤️ y Solidity como parte de un portafolio universitario.
