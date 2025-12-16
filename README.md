@@ -94,6 +94,7 @@ CrowdChain-DApp/
 ├── truffle-config.js   # Configuración de Truffle
 └── README.md           # Documentación del proyecto
 
+```
 ## 🤝 Cómo Contribuir
 ¡Las contribuciones son bienvenidas!
 1.  Haz un **Fork** del proyecto.
